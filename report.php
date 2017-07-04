@@ -1,8 +1,14 @@
 <?php
 // error_reporting(0);
 session_start();
-$id = $_GET['id'];
-$modul = $_GET['modul'];
+if (isset($_GET['id'])){
+  $id = $_GET['id'];
+}
+
+if (isset($_GET['modul'])){
+  $modul = $_GET['modul'];
+}
+
 include "config/koneksi.php";
 include "pdf/mpdf.php";
 
@@ -368,6 +374,24 @@ $pdf->AddPage('', // L - landscape, P - portrait
 $pdf->SetFont('Arial','B',16);
 $pdf->WriteHTML($html);
 $pdf->Output();
+break;
+
+case 'statistik':
+  echo "string";
+// $pdf = new MPDF();
+// $pdf->SetHTMLHeader('<img src="images/header.png"/>');
+// $pdf->AddPage('', // L - landscape, P - portrait 
+//   '', '', '', '',
+//         5, // margin_left
+//         5, // margin right
+//        60, // margin top
+//        30, // margin bottom
+//         0, // margin header
+//         0); // margin footer
+
+// $pdf->SetFont('Arial','B',16);
+// $pdf->WriteHTML($html);
+// $pdf->Output();
 break;
 
 
