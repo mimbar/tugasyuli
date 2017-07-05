@@ -263,9 +263,9 @@ $html ="<table border='1' >
    <td>$total_pinjaman</td>
    <td>$lama_pinjaman</td>
    <td>$angsuran</td>
-   </tr>";
-  $no++;
-  $counter++;
+ </tr>";
+ $no++;
+ $counter++;
 }
 $html .= "</tbody></table>";
 $pdf = new MPDF();
@@ -377,7 +377,19 @@ $pdf->Output();
 break;
 
 case 'statistik':
-  echo "string";
+  #require_once('laporan/statistik.php');
+
+$content = file_get_contents("http://localhost/yuli/laporan/statistik.php");
+print($content);
+
+$html = ob_get_contents($content);
+$pdf = new MPDF();
+
+$pdf->WriteHTML($html);
+$pdf->Output();
+
+
+exit;
 // $pdf = new MPDF();
 // $pdf->SetHTMLHeader('<img src="images/header.png"/>');
 // $pdf->AddPage('', // L - landscape, P - portrait 
