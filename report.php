@@ -382,11 +382,11 @@ case 'statistik':
 $content = file_get_contents("http://localhost/yuli/laporan/statistik.php");
 print($content);
 
-$html = ob_get_contents($content);
-$pdf = new MPDF();
+// $html = ob_get_contents($content);
+// $pdf = new MPDF();
 
-$pdf->WriteHTML($html);
-$pdf->Output();
+// $pdf->WriteHTML($html);
+// $pdf->Output();
 
 
 exit;
