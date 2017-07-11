@@ -2,57 +2,51 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" href="../plugin/chartist/chartist.min.css">
+	<script src="../plugin/chartist/chartist.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-haha
-	<canvas id="myChart" width="150px" height="150px"></canvas>
+	<div class="ct-chart" style="height: 500px; font-family: arial"></div>
+	<script type="text/javascript">
+	<?php
+		$exampleArr = ['lorem','ipsum','dolor','dolor','lorem','lorem'];
+    $exampleArr = array_count_values($exampleArr);
+
+    $labelArr = array();
+    $valueArr = array();
+
+    foreach($exampleArr as $key => $value) {
+        array_push($labelArr, $key); 
+        array_push($valueArr, $value);
+    }
+    ?>
+
+    var data = {  
+    	labels: <?php echo json_encode($labelArr) ?>,
+    	series: [
+    	<?php echo json_encode($valueArr); ?>
+    	]
+    };
+
+    var options = {  
+    	seriesBarDistance: 10
+    };
+
+    var responsiveOptions = [  
+    ['screen and (max-width: 640px)', {
+    	seriesBarDistance: 5,
+    	axisX: {
+    		labelInterpolationFnc: function (value) {
+    			return value[0];
+    		}
+    	}
+    }]
+    ];
+
+    new Chartist.Bar('.ct-chart', data, options, responsiveOptions);
 
 
+</script>
 
-
-
-
-	<script src="../css/Chart.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../css/Chart.bundle.min.js" type="text/javascript" charset="utf-8"></script>
-	
-	<script>
-		var ctx = document.getElementById("myChart").getContext('2d');
-		var myChart = new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-				datasets: [{
-					label: '# of Votes',
-					data: [12, 19, 3, 5, 2, 3],
-					backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)'
-					],
-					borderColor: [
-					'rgba(255,99,132,1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)'
-					],
-					borderWidth: 1
-				}]
-			},
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero:true
-						}
-					}]
-				}
-			}
-		});
-	</script>
 </body>
 </html>
