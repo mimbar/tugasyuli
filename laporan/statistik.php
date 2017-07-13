@@ -13,33 +13,29 @@
 
 		<div class="row">
 			<div class="col-md-4">
+				<center><h3>Jumlah Pengajuan</h3></center>
 				<div id="canvas-holder">
-					<canvas id="myChart" />
+					<canvas id="chartpendaftar" />
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-7">
 				<div id="canvas-holder">
-					<canvas id="chart-area" />
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div id="canvas-holder">
-					<canvas id="chart-area" />
+					<canvas id="chartpembayaranangsuran" />
 				</div>
 			</div>
 		</div>
+
+
+
+
+
+
+
+
+
+
+
 	</div>
-
-
-
-
-
-
-
-
-
-
-
 
 	<script src="../plugin/jquery.min.js"></script> 
 	<script src="../plugin/chart.bundle.min.js" type="text/javascript" charset="utf-8"></script>
@@ -60,12 +56,12 @@
 			url: 'backend/jumlah_diterima.php',
 			success: function (data) {
 				lineChartData = data;
-				alert(JSON.stringify(data));
-				var ctx = document.getElementById('myChart').getContext('2d');
+				var datanacoy = JSON.parse(data);
+				var ctx = document.getElementById('chartpendaftar').getContext('2d');
 				var chart = new Chart(ctx, {
 					type: 'pie',
 					data: {
-						labels: ["January", "February", "March", "April", "May", "June", "July"],
+						labels: datanacoy.labels,
 						datasets: [{
 							label: "Status Pengajuan",
 							backgroundColor: [
@@ -77,11 +73,40 @@
 							window.chartColors.green,
 							window.chartColors.blue,
 							],
-							data: [6, 10, 5, 2, 20, 30, 45],
+							data: datanacoy.datas,
 						}]
 					},
+					options: {
+						pieceLabel: {
+							mode: 'percentage',
+							precision: 2
+						}
+					}
+				});
+			} 
+		});
 
-
+		$.ajax({
+			type: 'POST',
+			url: 'backend/jumlah_angsuran.php',
+			success: function (data) {
+				lineChartData = data;
+				var hasil = JSON.parse(data);
+				var ctx = document.getElementById('chartpembayaranangsuran').getContext('2d');
+				var chart = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: hasil.labels,
+						datasets: [{
+							label: "Jumlah Pembayaran Angsuran",
+							 fill: false,
+							 borderColor: window.chartColors.red,
+							backgroundColor: [
+							window.chartColors.red
+							],
+							data: hasil.datas,
+						}]
+					},
 					options: {
 						pieceLabel: {
 							mode: 'percentage',

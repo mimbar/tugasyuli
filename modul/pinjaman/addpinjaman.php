@@ -19,7 +19,7 @@ require_once('modul/rekomendasi/fungsi.php');
           $nilaiakhir = $nilaiakhir + $eigen_kk[$ii][$i];
         }
         if ($nilaiakhir > 1) {
-          echo "<option value='1'>".$kk[$i][2]."</option>";
+          echo "<option value='".$kk[$i][1]."'>".$kk[$i][2]."</option>";
         }
         $nilaiakhir=0;
       }?> </td></select></tr>
