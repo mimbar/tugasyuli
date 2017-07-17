@@ -12,13 +12,24 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<center><h3>Jumlah Pengajuan</h3></center>
 				<div id="canvas-holder">
 					<canvas id="chartpendaftar" />
 				</div>
 			</div>
-			<div class="col-md-7">
+
+			<div class="col-md-6">
+				<center><h3>Pinjaman Terbayar</h3></center>
+				<div id="canvas-holder">
+					<canvas id="chartpinjamanterbayar" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<center><h3>Pembayaran Angsuran</h3></center>
 				<div id="canvas-holder">
 					<canvas id="chartpembayaranangsuran" />
 				</div>
@@ -40,6 +51,7 @@
 	<script src="../plugin/jquery.min.js"></script> 
 	<script src="../plugin/chart.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../plugin/Chart.PieceLabel.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../plugin/gauge.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		window.chartColors = {
 			red: 'rgb(255, 99, 132)',
@@ -99,8 +111,8 @@
 						labels: hasil.labels,
 						datasets: [{
 							label: "Jumlah Pembayaran Angsuran",
-							 fill: false,
-							 borderColor: window.chartColors.red,
+							fill: false,
+							borderColor: window.chartColors.red,
 							backgroundColor: [
 							window.chartColors.red
 							],
@@ -117,8 +129,31 @@
 			} 
 		});
 
+		var opts = {
+			angle: 0.000013, 
+			lineWidth: 0.1, 
+			radiusScale: 1, 
+			pointer: {
+				length: 0.6,
+				strokeWidth: 0.035, 
+				color: '#FFFFFF' 
+			},
+			limitMax: false,     
+			limitMin: false,     
+			colorStart: 'rgb(255, 99, 132)',   
+			colorStop: 'rgb(255, 99, 132)',    
+			strokeColor: '#EEEEEE',  
+			generateGradient: false,
+			highDpiSupport: true     
+		};
+		var target = document.getElementById('chartpinjamanterbayar'); 
+		var gauge = new Donut(target).setOptions(opts); 
+		gauge.maxValue = 1000;
+		gauge.setMinValue(0);  
+		gauge.animationSpeed = 32; 
+		gauge.set(500); 
 
-		
+
 
 
 
